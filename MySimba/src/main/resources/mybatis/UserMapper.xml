@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Sat Apr 27 10:16:15 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.IUserMapper">
+		<!-- 不要使用mybatis自带的二级缓存，因为它的缓存是处于mapper下的，很容易造成读脏数据 -->
+	<!-- <cache eviction="FIFO" flushInterval="2000" size="512" readOnly="true"/> -->
+
+	<!-- <cache eviction="FIFO" type="com.redis.LoggingRedisCache" flushInterval="2000"/> -->
+
+	<select id="checkUser" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+		select count(*) from systemUser where name = #{userName} and pwd = #{password}
+	</select>
+	
+	<insert id="addUser" parameterType="User">
+		INSERT into systemuser
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="account!=null">
+				account,
+			</if>
+			<if test="name!=null">
+				name,
+			</if>
+			<if test="pwd!=null">
+				pwd
+			</if>
+		</trim>
+		<trim prefix="values(" suffix=")" suffixOverrides=",">
+			<if test="account!=null">
+				#{account},
+			</if>
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="pwd!=null">
+				#{pwd}
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateUser" parameterType="User">
+		 update systemuser
+		 <set>
+		 	<if test="name!=null">
+		 		name=#{name}
+		 	</if>
+		 	<if test="pwd!=null">
+		 		pwd=#{pwd}
+		 	</if>
+		 </set>
+		 where account = #{account}
+	</update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!--Converted at: Sat Apr 27 10:16:15 CST 2013-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.IMenuMapper">
+	<resultMap type="com.model.Menu" id="resultMenu">
+		<id property="id" column="id"/>
+		<result property="parentID" column="parentid" />
+		<result property="parentID" column="parentid"/>
+		<result property="url" column="url"/>
+		<result property="orderNo" column="orderno"/>
+		<result property="text" column="text"/>
+	</resultMap>
+	<select id="listChildren" parameterType="java.lang.Integer" resultMap="resultMenu">
+		select * from  menu where parentID = #{parentID} order by orderNo
+	</select>
+	<select id="getCount" parameterType="int" resultType="int">
+		select count(*) from  menu where parentID = #{id}
+	</select>
+	
+	<update id="updateUser" parameterType="User">
+		 update systemuser
+		 <set>
+		 	<if test="name!=null">
+		 		name=#{name}
+		 	</if>
+		 	<if test="pwd!=null">
+		 		pwd=#{pwd}
+		 	</if>
+		 </set>
+		 where account = #{account}
+	</update>
+	
+</mapper>

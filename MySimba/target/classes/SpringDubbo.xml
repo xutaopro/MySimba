@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	<!-- 提供方应用名称信息 这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+	<dubbo:application name="" c></dubbo:application>
+	
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<!-- address可以Zookeeper集群配置，地址可以多个以逗号隔开等 -->
+	<!-- check注册中心不存在时，是否报错     subscribe是否向此注册中心订阅服务，如果设为false，将只注册，不订阅 -->
+	<!-- register是否向此注册中心注册服务，如果设为false，将只订阅，不注册 -->
+	<dubbo:registry address="" check="" subscribe="" register=""></dubbo:registry>
+	
+	<!-- 要保暴露的接口 -->
+	<!-- interface服务接口的路径     ref引用对应的实现类的Bean的ID-->
+	<dubbo:service interface="" ref=""></dubbo:service>
+</beans>
